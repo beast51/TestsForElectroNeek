@@ -1,0 +1,17 @@
+.container {
+    background-color: lightgray;
+    font-size: 8px;
+    display: inline-block;
+}
+
+.out-1 {
+    color: white;
+}
+
+.out-2 {
+    color: blue;
+}
+
+.out-3 {
+    color: red;
+}

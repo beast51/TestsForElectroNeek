@@ -1,0 +1,41 @@
+1. Вывести список сотрудников, получающих максимальную заработную плату в своем отделе
+
+SELECT *
+FROM EMPLOYEE
+WHERE EMPLOYEE.salary = (SELECT MAX(salary) FROM EMPLOYEE AS max WHERE max.department_id = EMPLOYEE.department_id)
+
+2. Вывести список ID отделов, количество сотрудников в которых не превышает 3 человек
+
+SELECT department_id
+FROM EMPLOYEE
+GROUP BY department_id
+HAVING COUNT(*) <= 3;
+
+3. Найти список ID отделов с максимальной суммарной зарплатой сотрудников
+
+SELECT DEPARTMENT_ID, SUM(SALARY) FROM EMPLOYEE GROUP BY DEPARTMENT_ID
+
+4. Добавить в БД новый отдел
+
+INSERT INTO `DEPARTMENT` (ID, NAME)
+VALUES ('5', 'Ruby');
+
+5. Добавить в новый отдел троих новых сотрудников и одного руководителя (с учетом заполнения всех полей)
+
+INSERT INTO `EMPLOYEE` (`ID`, `DEPARTMENT_ID`, `CHIEF_ID`, `NAME`, `SALARY`) VALUES ('6', '5', '1', 'Harry', '400'),
+('7', '5', '0', 'Piter', '250'), ('8', '5', '0', 'Vlad', '260'),('9', '5', '0', 'Sam', '210');
+
+6. Удалить отдел и всех сотрудников, привязанных к этому отделу
+
+DELETE FROM EMPLOYEE WHERE DEPARTMENT_ID='5'
+DELETE FROM DEPARTMENT WHERE ID='5'
+
+7. Обновить ID любого отдела так, чтобы "не потерять" работающих в нем сотрудников
+
+UPDATE DEPARTMENT
+SET ID = '6'
+WHERE ID = 2;
+
+UPDATE EMPLOYEE
+SET DEPARTMENT_ID = '6'
+WHERE DEPARTMENT_ID = '2';
